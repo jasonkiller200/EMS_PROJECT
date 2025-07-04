@@ -1,0 +1,170 @@
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; line-height: 1.6; }
+.container { max-width: 1400px; margin: auto; padding: 0 20px 20px 20px; }
+header { background: #2c3e50; color: #ecf0f1; padding: 1rem 0; text-align: center; margin-bottom: 20px; }
+header h1 { margin: 0; font-size: 1.8rem; font-weight: 300; }
+main .page { padding: 20px; background: #fff; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
+h3 { color: #34495e; margin-top: 0; }
+.form-container { background: #fdfdfd; padding: 20px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #eee; }
+form { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; align-items: end; }
+.form-group { display: flex; flex-direction: column; }
+.form-group.full-width { grid-column: 1 / -1; }
+.form-group label { margin-bottom: 5px; font-size: 0.9rem; color: #555; font-weight: 600; }
+form input, form select, form button { padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1rem; }
+form input:focus, form select:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); }
+form button { background-color: #3498db; color: white; border: none; cursor: pointer; transition: background-color 0.3s; font-weight: bold; }
+form button:hover { background-color: #2980b9; }
+form button.secondary { background-color: #6c757d; }
+form button.secondary:hover { background-color: #5a6268; }
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; vertical-align: middle; }
+th { background-color: #34495e; color: #ecf0f1; font-weight: 600; }
+tbody tr:nth-child(even) { background-color: #f9f9f9; }
+#data-entry-table input { width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
+#data-entry-section { margin-top: 20px; }
+#save-data-btn { margin-top: 15px; padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 4px; }
+#save-data-btn:hover { background-color: #218838; }
+#rb-factors-container .factor-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+#rb-factors-container input { flex: 1; }
+td.highlight { background-color: #ffcdd2; font-weight: bold; }
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard-controls input {
+    width: 60px;
+    padding: 8px;
+}
+
+.dashboard-controls button {
+    padding: 8px 12px;
+}
+
+.charts-grid {
+    display: grid;
+    /* 讓圖表自動排列，每個最小 400px，最大佔滿一行 */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+/* ========================================================= */
+/*  ↓↓↓ 新增：導覽列美化樣式 ↓↓↓                              */
+/* ========================================================= */
+
+/* 導覽列容器 */
+nav {
+    display: flex;
+    justify-content: flex-start; /* 從左邊開始排列 */
+    background-color: #ffffff;   /* 與 main.page 的背景色一致 */
+    padding: 8px;                /* 內邊距，給連結留出空間 */
+    border-radius: 8px;          /* 圓角效果 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 與 main.page 的陰影一致 */
+    margin-bottom: 25px;         /* 與下方內容的間距 */
+    gap: 10px;                   /* 連結之間的間距 */
+}
+
+/* 所有導覽連結的通用樣式 */
+nav a.nav-link {
+    color: #34495e; /* 使用您 h3 的顏色，看起來更一致 */
+    text-decoration: none;
+    font-weight: 600; /* 字體稍微加粗 */
+    font-size: 0.95rem;
+    padding: 10px 20px; /* 增加點擊區域 */
+    border-radius: 6px; /* 連結本身也帶有圓角 */
+    position: relative;
+    transition: all 0.25s ease-in-out; /* 平滑的過渡效果 */
+}
+
+/* 滑鼠懸停在非當前頁面連結上的效果 */
+nav a.nav-link:not(.active):hover {
+    background-color: #f4f7f6; /* 使用您 body 的背景色，產生微妙的凹陷感 */
+    color: #2980b9; /* 使用您按鈕 hover 的顏色 */
+}
+
+/* 當前頁面 (active) 連結的樣式 */
+nav a.nav-link.active {
+    background-color: #3498db; /* 使用您的主題色 (藍色) */
+    color: #ffffff; /* 文字變成白色 */
+    box-shadow: 0 2px 6px rgba(52, 152, 219, 0.4); /* 加上藍色光暈效果 */
+    pointer-events: none; /* 當前頁面不可再點擊 */
+}
+/* ========================================================= */
+/*  ↓↓↓ 新增：EnPI 定義表單的網格排版樣式 ↓↓↓                */
+/* ========================================================= */
+
+.enpi-grid-form {
+    display: grid;
+    /* 定義一個包含4個彈性欄位的網格 */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; /* 欄位之間的間距 */
+    align-items: start; /* 頂部對齊 */
+}
+
+/* 讓 form-section 佔滿所有欄位 */
+.enpi-grid-form .form-section {
+    grid-column: 1 / -1; /* 從第1欄橫跨到最後1欄 */
+    display: grid;
+    /* 區塊內部的網格也使用同樣的定義，以保持對齊 */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+/* 移除最後一個區塊的底線和邊距 */
+.enpi-grid-form .form-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* 讓 h4 標題也佔滿整行 */
+.enpi-grid-form h4 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+/* 讓需要佔滿整行的元素 (例如 checkbox) 橫跨所有欄位 */
+.enpi-grid-form .full-span {
+    grid-column: 1 / -1;
+}
+
+/* checkbox 的標籤樣式 */
+.enpi-grid-form .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal; /* 讓 checkbox 的標籤文字不是粗體 */
+}
+
+.enpi-grid-form .checkbox-label input[type="checkbox"] {
+    width: auto; /* 讓 checkbox 恢復正常大小 */
+    height: auto;
+}
+
+/* 操作按鈕的容器 */
+.enpi-grid-form .form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end; /* 按鈕靠右對齊 */
+    gap: 15px;
+    margin-top: 20px;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 標題會由各個子頁面定義 -->
+    <title>{% block title %}ISO 50001 能源管理系統{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ISO 50001 能源管理系統 (EMS)</h1>
+        </header>
+        <nav>
+            <!-- 根據當前頁面路徑來決定哪個連結是 active -->
+            <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">即時監控儀表板</a>
+            <a href="{{ url_for('regression_baseline') }}" class="nav-link {% if request.endpoint == 'regression_baseline' %}active{% endif %}">迴歸基線管理</a>
+            <a href="{{ url_for('enpi_management') }}" class="nav-link {% if request.endpoint == 'enpi_management' %}active{% endif %}">EnPI 與目標管理</a>
+            
+            <!-- ========================================================= -->
+            <!--  ↓↓↓ 新增：異常事件管理頁面的連結按鈕 ↓↓↓             -->
+            <!-- ========================================================= -->
+            <a href="{{ url_for('event_management') }}" class="nav-link {% if request.endpoint == 'event_management' %}active{% endif %}">異常事件管理</a>
+            <!-- ========================================================= -->
+
+            <a href="{{ url_for('admin_config') }}" class="nav-link {% if request.endpoint == 'admin_config' %}active{% endif %}">儀表板設定</a>
+        </nav>
+        <main>
+            <!-- 主要內容會由各個子頁面填充 -->
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <!-- JavaScript 檔案會由需要的子頁面單獨引用 -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>

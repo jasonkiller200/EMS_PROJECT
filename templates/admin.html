@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}儀表板設定 - {{ super() }}{% endblock %}
+
+{% block content %}
+<section id="admin-page">
+    <h2>儀表板圖表管理</h2>
+    <p>在這裡設定要在「即時監控儀表板」上顯示的圖表內容。</p>
+    <button id="add-new-chart-btn" class="primary">新增圖表</button>
+    
+    <div id="chart-config-list" style="margin-top: 20px;">
+        <!-- 現有的圖表設定會由 JS 載入到這裡 -->
+    </div>
+
+    <!-- 用於新增/編輯的彈出視窗或區塊 -->
+    <div id="chart-editor" class="form-container" style="display:none; border: 1px solid #ccc; padding: 15px; margin-top: 20px;">
+        <h3 id="editor-title">新增圖表</h3>
+        <input type="hidden" id="edit-chart-id">
+        <form id="chart-config-form">
+            <!-- (此處內容與您原來的 chart-editor 表單完全相同) -->
+            <div class="form-group"><label>圖表標題:</label><input type="text" id="chart-title" placeholder="例如: 冰水主機耗電量" required></div>
+            <div class="form-group"><label>來源資料表:</label><select id="source-table" required></select></div>
+            <div class="form-group"><label>時間欄位 (X軸):</label><select id="time-column" required></select></div>
+            <div class="form-group">
+                <label>時間群組:</label>
+                <select id="time-grouping">
+                    <option value="hour">每小時 (當天)</option>
+                    <option value="day">每日 (當月)</option>
+                    <option value="month">每月 (當年)</option>
+                </select>
+            </div>
+            <h4>資料序列 (Y軸)</h4>
+            <div id="series-container" class="full-width"></div>
+            <div class="form-group"><button type="button" id="add-series-btn" class="secondary">新增序列</button></div><hr>
+            <div class="form-group"><button type="submit" class="primary">儲存圖表</button><button type="button" id="cancel-edit-btn">取消</button></div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

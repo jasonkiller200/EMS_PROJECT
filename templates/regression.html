@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}迴歸基線管理 - {{ super() }}{% endblock %}
+
+{% block content %}
+<section id="regression-baseline">
+    <h2>迴歸基線管理 (動態)</h2>
+    <div class="form-container">
+        <h3>建立新的迴歸基線</h3>
+        <p>請先在外部工具 (如 Excel) 完成迴歸分析，再將公式係數填入此處。</p>
+        <form id="regression-baseline-form">
+            <!-- (此處內容與您原來的 regression-baseline-form 完全相同) -->
+            <div class="form-group"><label>基線名稱:</label><input type="text" id="rb-name" placeholder="例如: 114年度全廠用電基線" required></div>
+            <div class="form-group"><label>年度:</label><input type="number" id="rb-year" placeholder="例如: 2025" required></div>
+            <div class="form-group"><label>公式常數項 (截距):</label><input type="number" step="any" id="rb-intercept" required></div>
+            <div class="form-group"><label>R² (R-squared):</label><input type="number" step="any" id="rb-r2" placeholder="選填"></div>
+            <div id="rb-factors-container" class="form-group full-width"><label>迴歸因子與係數</label></div>
+            <div class="form-group"><button type="button" id="add-factor-btn" class="secondary">新增因子</button></div>
+            <div class="form-group"><button type="submit">建立基線</button></div>
+        </form>
+    </div>
+    <div class="form-container">
+         <h3>選擇基線以輸入/檢視數據</h3>
+         <select id="select-baseline-for-data"></select>
+    </div>
+    <div id="data-entry-section" style="display:none;">
+         <h3 id="data-entry-title"></h3>
+         <div class="table-container"><table id="data-entry-table"><thead></thead><tbody></tbody></table></div>
+         <button id="save-data-btn">儲存本頁數據</button>
+         <div id="chart-container" style="height: 400px; margin-top: 20px;"><canvas id="baseline-chart"></canvas></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/regression.js') }}"></script>
+{% endblock %}

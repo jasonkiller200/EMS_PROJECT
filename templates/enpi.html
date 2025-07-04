@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}EnPI 與目標管理 - {{ super() }}{% endblock %}
+
+{% block content %}
+<section id="enpi-page">
+    <div class="dashboard-header">
+        <h2>能源績效指標 (EnPI) 與目標管理</h2>
+        <div>
+            <button id="add-enpi-btn" class="primary">定義新的 EnPI</button>
+        </div>
+    </div>
+
+    <!-- EnPI 選擇和年份選擇 -->
+    <div class="form-container" style="display: flex; gap: 20px; align-items: center;">
+        <div class="form-group">
+            <label for="select-enpi">選擇要管理的 EnPI:</label>
+            <select id="select-enpi"></select>
+        </div>
+        <div class="form-group">
+            <label for="select-year">選擇年份:</label>
+            <select id="select-year"></select>
+        </div>
+    </div>
+
+    <!-- EnPI 數據管理表格和圖表 -->
+    <div id="enpi-data-section" style="display:none;">
+        <h3 id="enpi-title"></h3>
+        <div class="table-container">
+            <table id="enpi-table">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button id="save-enpi-data-btn" class="primary" style="margin-top: 15px;">儲存本頁數據</button>
+        <div id="enpi-chart-container" style="height: 400px; margin-top: 20px;">
+            <canvas id="enpi-chart"></canvas>
+        </div>
+    </div>
+    
+    <!-- ========================================================= -->
+    <!--  ↓↓↓ 修改點：為表單加上新的結構和 class ↓↓↓              -->
+    <!-- ========================================================= -->
+    <div id="enpi-editor" class="form-container" style="display:none; border: 1px solid #ccc; padding: 15px; margin-top: 20px;">
+        <h3>定義新的 EnPI</h3>
+        <!-- 使用 enpi-grid-form 這個新 class 來套用網格排版 -->
+        <form id="enpi-def-form" class="enpi-grid-form">
+            <!-- 將表單內容分組 -->
+            <div class="form-section full-span">
+                <h4>基本資訊</h4>
+                <div class="form-group"><label>EnPI 名稱:</label><input type="text" name="name" required placeholder="例如：噸產品耗電量"></div>
+                <div class="form-group"><label>EnPI 單位:</label><input type="text" name="unit" required placeholder="例如：kWh/噸"></div>
+                <div class="form-group"><label>說明:</label><input type="text" name="description" placeholder="選填"></div>
+            </div>
+
+            <div class="form-section full-span">
+                <h4>分子 (能源消耗)</h4>
+                <div class="form-group"><label>來源資料表:</label><select name="numerator_source_table" required></select></div>
+                <div class="form-group"><label>來源欄位 (數值):</label><select name="numerator_source_column" required></select></div>
+                <div class="form-group"><label>來源欄位 (時間):</label><select name="numerator_time_column" required></select></div>
+                <div class="form-group"><label>聚合方式:</label><select name="numerator_aggregation"><option value="SUM">總和 (Sum)</option><option value="AVG">平均 (Avg)</option></select></div>
+            </div>
+
+            <div class="form-section full-span">
+                <h4>分母 (產出或變數)</h4>
+                <div class="form-group"><label>變數名稱:</label><input type="text" name="denominator_variable_name" required placeholder="例如：產量"></div>
+                <div class="form-group"><label>變數單位:</label><input type="text" name="denominator_unit" required placeholder="例如：噸"></div>
+            </div>
+            
+            <div class="form-group full-span">
+                <label class="checkbox-label"><input type="checkbox" name="higher_is_better"> 指標數值越高越好 (預設為越低越好)</label>
+            </div>
+            
+            <div class="form-actions full-span">
+                <button type="submit" class="primary">儲存定義</button>
+                <button type="button" id="cancel-enpi-editor" class="secondary">取消</button>
+            </div>
+        </form>
+    </div>
+    <!-- ========================================================= -->
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/enpi.js') }}"></script>
+{% endblock %}

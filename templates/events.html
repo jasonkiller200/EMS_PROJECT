@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}異常事件管理 - {{ super() }}{% endblock %}
+
+{% block content %}
+<section id="events-page">
+    <div class="dashboard-header">
+        <h2>異常事件與行動方案管理</h2>
+        <div>
+            <button id="add-event-btn" class="primary">手動建立事件</button>
+        </div>
+    </div>
+
+    <!-- 過濾器 -->
+    <div class="form-container">
+        <label for="status-filter">篩選事件狀態:</label>
+        <select id="status-filter">
+            <option value="assigned">已指派 (Assigned)</option>
+            <option value="in_progress">處理中 (In Progress)</option>
+            <option value="closed">已結案 (Closed)</option>
+            <option value="all">所有事件</option>
+        </select>
+    </div>
+
+    <!-- 事件列表 -->
+    <div id="events-list-container" class="table-container">
+        <table id="events-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>事件標題</th>
+                    <th>嚴重性</th>
+                    <th>狀態</th>
+                    <th>負責人</th>
+                    <th>發生時間</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS 會在這裡填充事件列表 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 事件詳情與行動方案的彈出視窗 (Modal) -->
+    <div id="event-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <div id="modal-body">
+                <!-- JS 會在這裡填充事件詳情 -->
+                <div id="event-details-view"></div>
+                <div id="add-event-form" style="display:none;">
+                    <h3>建立新事件</h3>
+                    <label for="event-title">事件標題:</label>
+                    <input type="text" id="event-title" required>
+
+                    <label for="severity">嚴重性:</label>
+                    <select id="severity">
+                        <option value="low">低 (Low)</option>
+                        <option value="medium">中 (Medium)</option>
+                        <option value="high">高 (High)</option>
+                    </select>
+
+                    <label for="assigned-to">負責人:</label>
+                    <input type="text" id="assigned-to">
+
+                    <label for="due-date">預計完成日期:</label>
+                    <input type="date" id="due-date">
+
+                    <label for="event-type">事件類型:</label>
+                    <input type="text" id="event-type" placeholder="例如: 系統錯誤, 數據異常">
+
+                    <label for="impact-scope">影響範圍:</label>
+                    <input type="text" id="impact-scope" placeholder="例如: 某部門, 某服務, 50位用戶">
+
+                    <label for="root-cause">根本原因:</label>
+                    <textarea id="root-cause" rows="3" placeholder="簡述事件的根本原因"></textarea>
+
+                    <label for="initial-description">初始描述:</label>
+                    <textarea id="initial-description" rows="4"></textarea>
+
+                    <button id="save-event-btn" class="primary">儲存事件</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}

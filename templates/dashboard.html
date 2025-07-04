@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}即時監控儀表板 - {{ super() }}{% endblock %}
+
+{% block content %}
+<section id="dashboard">
+    <div class="dashboard-header">
+        <h2>即時監控儀表板</h2>
+        <div class="dashboard-controls">
+            <label>自動刷新 (秒):</label>
+            <input type="number" id="refresh-interval" value="60" min="10">
+            <button id="toggle-refresh-btn">暫停刷新</button>
+        </div>
+    </div>
+    
+    <!-- 動態圖表區 -->
+    <h3>動態監控圖表</h3>
+    <div id="charts-grid" class="charts-grid">
+        <!-- JavaScript 將會在這裡動態插入圖表 -->
+        <p>正在載入圖表...</p>
+    </div>
+    
+    <hr style="margin: 40px 0;">
+
+    <!-- 迴歸基線圖表區 -->
+    <h3>能源基線績效</h3>
+    <div class="form-container">
+        <label for="select-baseline-for-dashboard">選擇要檢視的基線:</label>
+        <select id="select-baseline-for-dashboard"></select>
+    </div>
+    <div id="baseline-chart-container" style="display:none; height: 400px; margin-top: 20px;">
+        <canvas id="dashboard-baseline-chart"></canvas>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
